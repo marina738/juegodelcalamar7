@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Squid Game Fan Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+  <style id="app-style">
+    :root {
+      --squid-pink: #ff0086;
+      --squid-teal: #04d9ff;
+      --squid-dark: #121212;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    
+    .hero {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://cdn.pixabay.com/photo/2022/03/08/10/56/squid-game-7055102_1280.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: white;
+    }
+    
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      text-shadow: 0 0 10px rgba(255, 0, 134, 0.8);
+      animation: glow 2s infinite alternate;
+    }
+    
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px rgba(255, 0, 134, 0.8);
+      }
+      to {
+        text-shadow: 0 0 20px rgba(255, 0, 134, 1), 0 0 30px rgba(4, 217, 255, 0.8);
+      }
+    }
+    
+    .section-title {
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--squid-dark);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, var(--squid-pink), var(--squid-teal));
+    }
+    
+    .character-card {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      margin-bottom: 20px;
+      height: 100%;
+    }
+    
+    .character-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(255, 0, 134, 0.2);
+    }
+    
+    .character-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .character-card .card-body {
+      padding: 1.25rem;
+    }
+    
+    .character-card .card-title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .character-card .card-text {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+    
+    .swiper {
+      width: 100%;
+      padding-top: 20px;
+      padding-bottom: 50px;
+    }
+    
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 300px;
+      height: 200px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .swiper-pagination-bullet-active {
+      background-color: var(--squid-pink);
+    }
+    
+    .trivia-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .trivia-card:hover {
+      box-shadow: 0 15px 40px rgba(255, 0, 134, 0.2);
+    }
+    
+    .btn-trivia {
+      background: linear-gradient(to right, var(--squid-pink), var(--squid-teal));
+      border: none;
+      color: white;
+      font-weight: 600;
+      padding: 10px 25px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-trivia:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(255, 0, 134, 0.4);
+    }
+    
+    .spinner-border {
+      color: var(--squid-pink);
+    }
+    
+    footer {
+      background-color: var(--squid-dark);
+      color: white;
+      padding: 2rem 0;
+    }
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+      color: var(--squid-dark);
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background: linear-gradient(to right, var(--squid-pink), var(--squid-teal));
+      color: white;
+      transform: translateY(-5px);
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .content-row {
+        flex-direction: column;
+      }
+      
+      .swiper-slide {
+        width: 250px;
+        height: 170px;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="container text-center">
+      <h1>Squid Game Fan Hub</h1>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row content-row">
+        <!-- Synopsis -->
+        <div class="col-lg-5 mb-4">
+          <h2 class="section-title">¿De qué se trata?</h2>
+          <p class="lead">
+            El Juego del Calamar es una serie surcoreana que sigue a un grupo de personas desesperadas por dinero que aceptan una misteriosa invitación para competir en juegos infantiles. Lo que no saben es que estos juegos tienen consecuencias mortales y solo habrá un ganador que se llevará un premio millonario.
+          </p>
+          <p>
+            Creada por Hwang Dong-hyuk, esta serie se convirtió en un fenómeno global por su crítica social, su tensión constante y sus memorables personajes. La historia mezcla nostalgia infantil con violencia gráfica, creando un contraste inquietante que ha cautivado a audiencias de todo el mundo.
+          </p>
+        </div>
+        
+        <!-- Characters Gallery -->
+        <div class="col-lg-7">
+          <h2 class="section-title mb-4">Personajes Principales</h2>
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="character-card">
+                <img src="imag/download.jpg" alt="Seong Gi-hun">
+                <div class="card-body">
+                  <h5 class="card-title">Seong Gi-hun (456)</h5>
+                  <p class="card-text">Un hombre con problemas de juego que entra en los juegos para pagar sus deudas y recuperar a su hija.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="character-card">
+                <img src="imag/download (1).jpg" alt="Oh Il-nam">
+                <div class="card-body">
+                  <h5 class="card-title">Oh Il-nam (001)</h5>
+                  <p class="card-text">El jugador más anciano que padece un tumor cerebral y busca emoción en sus últimos días.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="character-card">
+                <img src="imag/images.jpg" alt="Kang Sae-byeok">
+                <div class="card-body">
+                  <h5 class="card-title">Kang Sae-byeok (067)</h5>
+                  <p class="card-text">Una desertora norcoreana que necesita dinero para rescatar a su familia y comenzar una nueva vida.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="character-card">
+                <img src="imag/captura.1737445076.6139.jpg" alt="Guardia">
+                <div class="card-body">
+                  <h5 class="card-title">Guardias</h5>
+                  <p class="card-text">Trabajadores enmascarados con uniformes rojos que supervisan los juegos y eliminan a los perdedores.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visual Gallery -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title text-center mb-5">Galería Visual</h2>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="imag/captura.1737445076.6139.jpg" alt="Imagen 1">
+          </div>
+          <div class="swiper-slide">
+            <img src="imag/netflix-anuncia-temporada-juego-calamar.jpg" alt="Imagen 2">
+          </div>
+          <div class="swiper-slide">
+            <img src="imag/el-juego-del-calamar-temporada-2.jpg" alt="Imagen 3">
+          </div>
+          <div class="swiper-slide">
+            <img src="imag/El-Juego-del-Calamar-2-001.jpg" alt="Imagen 4">
+          </div>
+          <div class="swiper-slide">
+            <img src="imag/juego-calamar-2-poster-66ec3afb1bba8.avif" alt="Imagen 5">
+          </div>
+          <div class="swiper-slide">
+            <img src="imag/psicologia-juego-calamar.webp" alt="Imagen 6">
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trivia Section -->
+  <section class="py-5">
+    <div class="container text-center">
+      <h2 class="section-title text-center mb-5">Trivia</h2>
+      <p class="mb-4">Descubre datos curiosos sobre El Juego del Calamar</p>
+      <button id="trivia-btn" class="btn btn-trivia mb-4">Obtener dato curioso</button>
+      
+      <div id="loading-spinner" class="d-none">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="mt-2">Buscando datos interesantes...</p>
+      </div>
+      
+      <div id="trivia-content" class="trivia-card d-none">
+        <h4 id="trivia-title" class="mb-3">¿Sabías que...?</h4>
+        <p id="trivia-text" class="mb-0"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container py-4">
+      <h3 class="mb-4">Sigue El Juego del Calamar</h3>
+      <div class="d-flex justify-content-center">
+        <a href="javascript:void(0)" class="social-icon">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="javascript:void(0)" class="social-icon">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="javascript:void(0)" class="social-icon">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="javascript:void(0)" class="social-icon">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+      <p class="mt-4 mb-0">© 2025 Squid Game Fan Hub - Sitio no oficial dedicado a los fans</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script id="app-script">
+    // Initialize Swiper
+    const swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      breakpoints: {
+        // when window width is >= 320px
+        320: {
+          slidesPerView: 1,
+        },
+        // when window width is >= 640px
+        640: {
+          slidesPerView: 2,
+        },
+        // when window width is >= 992px
+        992: {
+          slidesPerView: 3,
+        }
+      }
+    });
+
+    // Trivia functionality
+    const triviaBtn = document.getElementById('trivia-btn');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    const triviaContent = document.getElementById('trivia-content');
+    const triviaText = document.getElementById('trivia-text');
+
+    // Check for cached trivia
+    document.addEventListener('DOMContentLoaded', function() {
+      const cachedTrivia = localStorage.getItem('squidGameTrivia');
+      if (cachedTrivia) {
+        triviaText.textContent = cachedTrivia;
+        triviaContent.classList.remove('d-none');
+      }
+    });
+
+    // Simulated API call for trivia
+    triviaBtn.addEventListener('click', function() {
+      // Hide trivia and show spinner
+      triviaContent.classList.add('d-none');
+      loadingSpinner.classList.remove('d-none');
+      
+      // Simulate network delay
+      setTimeout(() => {
+        // Hide spinner and show trivia
+        loadingSpinner.classList.add('d-none');
+        triviaContent.classList.remove('d-none');
+        
+        // For the prototype, we'll use a placeholder message
+        const triviaInfo = "El traje de los guardias de El Juego del Calamar se inspiró en la forma de los símbolos del control del PlayStation. Las máscaras que usan tienen los símbolos círculo, triángulo y cuadrado. Estos mismos símbolos aparecen en las tarjetas de invitación al juego.";
+        
+        // Update the trivia text and save to localStorage
+        triviaText.textContent = triviaInfo;
+        localStorage.setItem('squidGameTrivia', triviaInfo);
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
